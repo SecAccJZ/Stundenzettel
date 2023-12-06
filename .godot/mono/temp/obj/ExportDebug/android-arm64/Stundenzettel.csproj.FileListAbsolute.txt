@@ -195,3 +195,4 @@ F:\_My Code\Stundenzettel\.godot\mono\temp\obj\ExportDebug\android-arm64\refint\
 F:\_My Code\Stundenzettel\.godot\mono\temp\obj\ExportDebug\android-arm64\Stundenzettel.pdb
 F:\_My Code\Stundenzettel\.godot\mono\temp\obj\ExportDebug\android-arm64\Stundenzettel.genruntimeconfig.cache
 F:\_My Code\Stundenzettel\.godot\mono\temp\obj\ExportDebug\android-arm64\ref\Stundenzettel.dll
+F:\_My Code\Stundenzettel\.godot\mono\temp\obj\ExportDebug\android-arm64\Stundenzettel.sourcelink.json

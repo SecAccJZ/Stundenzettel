@@ -12,7 +12,8 @@ public class TimeSpanEntry
 
 
 
-   public TimeSpanEntry(TimeOnly fromTime, TimeOnly toTime, string customer = null, Purposes? purpose = null, string description = null)
+#region Constructors
+   public TimeSpanEntry(TimeOnly fromTime = new TimeOnly(), TimeOnly toTime = new TimeOnly(), string customer = "", Purposes? purpose = null, string description = "")
    {
       FromTime = fromTime;
       ToTime = toTime;
@@ -23,6 +24,18 @@ public class TimeSpanEntry
 
 
 
+   public TimeSpanEntry(Dictionary dict)
+   {
+      FromTime = TimeOnly.Parse((string)dict["fromTime"]);
+      ToTime = TimeOnly.Parse((string)dict["toTime"]);
+      Customer = (string)dict["customer"] == "" ? null : (string)dict["customer"];
+      Purpose = (int)dict["purpose"] == -1 ? null : (Purposes)(int)dict["purpose"];
+      Description = (string)dict["description"] == "" ? null : (string)dict["description"];
+   }
+#endregion
+
+
+
    public string ToJsonString()
    {
       Dictionary dict = new Dictionary
@@ -30,21 +43,10 @@ public class TimeSpanEntry
          { "fromTime", FromTime.ToString() },
          { "toTime", ToTime.ToString() },
          { "customer", Customer == null ? "" : Customer },
-         { "purpose", Purpose == null ? "" : (int)Purpose },
+         { "purpose", Purpose == null ? -1 : (int)Purpose },
          { "description", Description == null ? "" :Description }
 		};
 
       return Json.Stringify(dict, "\t");
-   }
-
-
-
-   public void SetValuesFromDictionary(Dictionary dict)
-   {
-      FromTime = TimeOnly.Parse((string)dict["fromTime"]);
-      ToTime = TimeOnly.Parse((string)dict["toTime"]);
-      Customer = (string)dict["customer"] == "" ? null : (string)dict["customer"];
-      Purpose = (string)dict["purpose"] == "" ? null : (Purposes)(int)dict["purpose"];
-      Description = (string)dict["description"] == "" ? null : (string)dict["description"];
    }
 }

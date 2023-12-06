@@ -3,6 +3,7 @@ using Godot;
 using System;
 using Godot.Collections;
 using System.IO.Enumeration;
+using System.Globalization;
 
 public partial class TimeSheetButton : HSplitContainer
 {
@@ -25,16 +26,27 @@ public partial class TimeSheetButton : HSplitContainer
 #region Signals
 	private void SwitchToFileEdit()
 	{
+		List<TimeSpanEntry> entries = new List<TimeSpanEntry>();
 		string dataString;
+
 		using(var file = FileAccess.Open($"{Manager.documentsFilePath}/Stundenzettel/TimeSheets/{FileName}", FileAccess.ModeFlags.Read))
 		{
 			dataString = file.GetAsText(true);
 		}
+
 		string[] data = (string[])Json.ParseString(dataString);
-		Dictionary sheet = (Dictionary)Json.ParseString(data[0]);
-		TimeSheet sheet = new TimeSheet(DateOnly.Parse(dateText), )
 		
-		Manager.Singleton.SwitchScene("TimeShetEditor");
+		foreach(string jsonString in data)
+		{
+			GD.Print(jsonString);
+			Dictionary dict = (Dictionary)Json.ParseString(jsonString);
+			entries.Add(new TimeSpanEntry(dict));
+		}
+
+		TimeSheet sheet = new TimeSheet(DateOnly.Parse(dateText), entries);
+		Manager.Singleton.selectedSheet = sheet;
+		
+		Manager.Singleton.SwitchScene("TimeSheetEditor");
 	}
 
 

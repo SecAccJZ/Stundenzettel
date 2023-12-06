@@ -69,12 +69,12 @@ public partial class TimeSpanBlockEditor : CanvasLayer
 
 
 
-    private void SetPurtpose(int index) => entry.Purpose = (Purposes)index;
+   private void SetPurtpose(int index) => entry.Purpose = (Purposes)index;
 
 
 
-    private void SetDescription() => entry.Description = description.Text;
-    #endregion
+   private void SetDescription() => entry.Description = description.Text;
+   #endregion
 
 
 
