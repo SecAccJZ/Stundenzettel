@@ -1,5 +1,6 @@
-using System;
 using Godot;
+using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Ranges;
 
 public partial class TimeSheetSelector : CanvasLayer
 {
@@ -18,20 +19,45 @@ public partial class TimeSheetSelector : CanvasLayer
 		Manager.Singleton.FixDocumentDirectory();
 		timeSheetFiles = DirAccess.GetFilesAt(timeSheetsPath);
 		
-		PopulateList();
+		timeSheetList.PopulateList(timeSheetFiles, timeSheetButton);
 	}
 
 
 
-	private void PopulateList()
+#region Excel logic
+	private void ConvertToExcelFiles()
 	{
-		foreach(string sheet in timeSheetFiles)
+		foreach(string timeSheet in timeSheetFiles)
 		{
-			TimeSheetButton newEntry = timeSheetButton.Instantiate() as TimeSheetButton;
-			newEntry.FileName = sheet;
-			timeSheetList.AddChild(newEntry);
+			string filePath = $"{Manager.documentsFilePath}/Stundenzettel/";
+			
+
+			using (var file = FileAccess.Open($"{filePath}/{timeSheet.Remove(timeSheet.Length - 5)}", FileAccess.ModeFlags.Write))
+			{
+			}
+
+			ExcelWorksheet sheet = CreateExcelWorksheet(new ExcelPackage(), timeSheet);
+
+			//TODO Implement conversion to .xlsx file.
+			// sheet.Cells[1, 1, 1, 4].FormatCell());
 		}
 	}
+
+
+
+	private ExcelWorksheet CreateExcelWorksheet(ExcelPackage package, string sheetName)
+	{
+		package.Workbook.Worksheets.Add(sheetName);
+		ExcelWorksheet sheet = package.Workbook.Worksheets[0];
+		sheet.Cells.Style.Font.Size = 12;
+		sheet.Cells.Style.Font.Name = "Arial";
+
+		return sheet;
+	}
+
+
+	
+#endregion
 
 
 

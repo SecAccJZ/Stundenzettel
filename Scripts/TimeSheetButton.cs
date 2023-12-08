@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using Godot;
 using System;
 using Godot.Collections;
-using System.IO.Enumeration;
-using System.Globalization;
 
 public partial class TimeSheetButton : HSplitContainer
 {

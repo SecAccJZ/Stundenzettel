@@ -22,7 +22,7 @@ public partial class TimeSheetEditor : CanvasLayer
 		if (timeSheet.TimeSpanEntries.Count > 0)
 		{
 			Manager.Singleton.lastTimeStamp = timeSheet.TimeSpanEntries.Last().ToTime;
-			PopulateEntryList(timeSheet.TimeSpanEntries);
+			timeSpanList.PopulateList(timeSheet.TimeSpanEntries, timeSpanBlockButton);
 		}
 		else
 			Manager.Singleton.lastTimeStamp = TimeOnly.Parse((string)Manager.Singleton.settingsData["startTime"]);
@@ -42,18 +42,6 @@ public partial class TimeSheetEditor : CanvasLayer
 			);
 
 		return Manager.Singleton.selectedSheet;
-	}
-
-
-
-	private void PopulateEntryList(List<TimeSpanEntry> entries)
-	{
-		foreach(TimeSpanEntry entry in entries)
-		{
-			var newEntry = timeSpanBlockButton.Instantiate() as TimeSpanBlockButton;
-			newEntry.Entry = entry;
-			timeSpanList.AddChild(newEntry);
-		}
 	}
 
 

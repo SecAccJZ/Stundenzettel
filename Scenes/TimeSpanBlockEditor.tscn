@@ -7,7 +7,7 @@
 [ext_resource type="Theme" uid="uid://001cikhergfu" path="res://Themes/DefaulLineEdit.tres" id="5_6rmbp"]
 [ext_resource type="StyleBox" uid="uid://bohay8sac6a08" path="res://Themes/Styles/DefaultLine.tres" id="6_s1ox0"]
 [ext_resource type="Theme" uid="uid://dktdsgfp64vc" path="res://Themes/BackButton.tres" id="7_80gdn"]
-[ext_resource type="Texture2D" uid="uid://dethjkxhe61b7" path="res://Assets/arrow-back-up.svg" id="8_gxvij"]
+[ext_resource type="Texture2D" uid="uid://dethjkxhe61b7" path="res://Assets/Sprites/arrow-back-up.svg" id="8_gxvij"]
 
 [node name="TimeSpanBlock" type="CanvasLayer"]
 script = ExtResource("1_jndds")
