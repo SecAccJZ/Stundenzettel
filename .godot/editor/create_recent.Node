@@ -1,10 +1,10 @@
+Label
 HSplitContainer
 HBoxContainer
 FileDialog
 HSeparator
 VBoxContainer
 LineEdit
-Label
 RichTextLabel
 Button
 MenuButton

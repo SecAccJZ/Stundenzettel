@@ -37,7 +37,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="headerPadding" type="MarginContainer" parent="."]
+[node name="HeaderPadding" type="MarginContainer" parent="."]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 162.0
@@ -46,11 +46,11 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="HBox" type="HSplitContainer" parent="headerPadding"]
+[node name="HBox" type="HSplitContainer" parent="HeaderPadding"]
 layout_mode = 2
 dragger_visibility = 1
 
-[node name="Back" type="Button" parent="headerPadding/HBox"]
+[node name="Back" type="Button" parent="HeaderPadding/HBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -60,7 +60,7 @@ text = "Zurück"
 icon = ExtResource("7_omeei")
 expand_icon = true
 
-[node name="Convert" type="Button" parent="headerPadding/HBox"]
+[node name="Convert" type="Button" parent="HeaderPadding/HBox"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -70,5 +70,5 @@ text = "Generate Excel files"
 icon = ExtResource("6_07v8f")
 expand_icon = true
 
-[connection signal="button_down" from="headerPadding/HBox/Back" to="." method="SwitchToMainMenu"]
-[connection signal="button_down" from="headerPadding/HBox/Convert" to="." method="ConvertToExcelFiles"]
+[connection signal="button_down" from="HeaderPadding/HBox/Back" to="." method="SwitchToMainMenu"]
+[connection signal="button_down" from="HeaderPadding/HBox/Convert" to="." method="GenerateExcelFiles"]

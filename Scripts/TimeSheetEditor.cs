@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public partial class TimeSheetEditor : CanvasLayer
@@ -17,7 +16,7 @@ public partial class TimeSheetEditor : CanvasLayer
 		date = GetNode<LineEdit>("TitlePadding/Date");
 		timeSpanList = GetNode<VBoxContainer>("Padding/Splitter/ScrollList/TimeSpanList");
 
-		timeSheet = LoadTimeSheet();
+		timeSheet = FileManager.LoadSelectedTimeSheet();
 
 		if (timeSheet.TimeSpanEntries.Count > 0)
 		{
@@ -29,43 +28,6 @@ public partial class TimeSheetEditor : CanvasLayer
 
 		date.Text = timeSheet.Date.ToString();
     }
-
-
-
-	private TimeSheet LoadTimeSheet()
-	{
-		if (Manager.Singleton.selectedSheet == null)
-			Manager.Singleton.selectedSheet = new TimeSheet
-			(
-				DateOnly.FromDateTime(DateTime.Today),
-				new List<TimeSpanEntry>()
-			);
-
-		return Manager.Singleton.selectedSheet;
-	}
-
-
-
-	private void SaveTimeSheet(TimeSheet sheet)
-	{
-		string[] data = new string[timeSheet.TimeSpanEntries.Count];
-		int pointer = 0;
-
-		foreach(TimeSpanEntry entry in timeSheet.TimeSpanEntries)
-		{
-			data[pointer] = entry.ToJsonString();
-			pointer++;
-		}
-
-		string dataString = Json.Stringify(data, "\t");
-
-		Manager.Singleton.FixDocumentDirectory();
-
-		using (var file = FileAccess.Open($"{Manager.documentsFilePath}/Stundenzettel/TimeSheets/{sheet.Date.ToString("yyyy/MM/dd")}.json", FileAccess.ModeFlags.Write))
-		{
-			file.StoreString(dataString);
-		}
-	}
 
 
 
@@ -94,7 +56,8 @@ public partial class TimeSheetEditor : CanvasLayer
 
 	private void SwitchToMainMenu()
 	{
-		SaveTimeSheet(timeSheet);
+		if (timeSheet.TimeSpanEntries.Count > 0)
+			FileManager.SaveTimeSheet(timeSheet);
 
 		Manager.Singleton.selectedSheet = null;
 		Manager.Singleton.CallDeferred("SwitchScene", "MainMenu");

@@ -37,7 +37,7 @@ project/assembly_name="Stundenzettel"
 
 folder_colors={
 "res://Assets/": "red",
-"res://ExcelTemplate/": "teal",
+"res://ExcelTemplates/": "teal",
 "res://Objects/": "purple",
 "res://Scenes/": "pink",
 "res://Scripts/": "green",

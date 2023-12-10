@@ -7,7 +7,8 @@ public partial class Manager : Node
 	public static Manager Singleton;
 	public Dictionary settingsData;
 	public const string settingsFilePath = "user://settings.json";
-	public static readonly string documentsFilePath = $"{OS.GetSystemDir(OS.SystemDir.Documents)}";
+	public static readonly string documentsFilePath = OS.GetSystemDir(OS.SystemDir.Documents);
+	public static readonly string excelTimeSheetTemplatePath = OS.GetExecutablePath().GetBaseDir().PathJoin("ExcelTemplates/StundenzettelTemplate.xlsx");
 	private DirAccess documentsDir;
 	public TimeOnly lastTimeStamp;
 	public TimeSheet selectedSheet;
@@ -17,7 +18,11 @@ public partial class Manager : Node
 
 	public override void _Ready()
     {
+		// FIXME Delete this print
+		GD.Print(excelTimeSheetTemplatePath);
+
 #region Singleton logic
+
 		if (Singleton == null)
 		{
 			Singleton = this;
@@ -28,7 +33,7 @@ public partial class Manager : Node
 			QueueFree();
 		#endregion
 
-	documentsDir = DirAccess.Open($"{documentsFilePath}");
+		documentsDir = DirAccess.Open($"{documentsFilePath}");
 
 #region Set/Load Default Settings
 		var file = FileAccess.Open(settingsFilePath, FileAccess.ModeFlags.Read);
