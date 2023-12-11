@@ -186,4 +186,4 @@ expand_icon = true
 [connection signal="text_changed" from="Padding/ItemList/Customer/Input" to="." method="SetCustomer"]
 [connection signal="item_selected" from="Padding/ItemList/Purpose/Input" to="." method="SetPurtpose"]
 [connection signal="text_changed" from="Padding/ItemList/DescriptionInput" to="." method="SetDescription"]
-[connection signal="button_up" from="BackPadding/Back" to="." method="SwitchToTimeSheetEditor"]
+[connection signal="button_down" from="BackPadding/Back" to="." method="SwitchToTimeSheetEditor"]

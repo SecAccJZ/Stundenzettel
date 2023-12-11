@@ -77,15 +77,15 @@ public static class FileManager
    public static void ConvertToExcelFiles(string[] filesNames)
    {
       string[] timeSpanEntryNames = new string[5] { "fromTime", "toTime", "customer", "purpose", "description"};
+      byte[] templateBytes = FileAccess.GetFileAsBytes("res://ExcelTemplates/StundenzettelTemplate.xlsx");
+
+      System.IO.MemoryStream ms = new System.IO.MemoryStream(templateBytes);
 
       foreach (string timeSheetName in filesNames)
       {
          
          TimeSheet currentFile = GetTimeSheetFromFile(timeSheetName);
-         ExcelPackage package = new ExcelPackage(Manager.excelTimeSheetTemplatePath);
-         // FIXME Delete this print
-         GD.Print(package.File);
-         GD.Print($"{package.Workbook.Worksheets.Count}");
+         ExcelPackage package = new ExcelPackage(ms);
          ExcelWorksheet sheet = package.Workbook.Worksheets[0];
 
          sheet.FillExcelFile(currentFile, CleanFileName(timeSheetName), timeSpanEntryNames);
@@ -93,6 +93,8 @@ public static class FileManager
          string  savePath = $"{Manager.documentsFilePath}/Stundenzettel/Rapportzettel - {Manager.Singleton.settingsData["workerName"]} - {currentFile.Date}.xlsx";
          package.SaveAs(savePath);
       }
+
+      ms.Close();
    }
 
 
@@ -103,6 +105,9 @@ public static class FileManager
       int row;
       int col = 0;
 
+      TimeSpanEntry entry;
+      Dictionary timeSpanData;
+
       TimeOnly allWorkTime = new TimeOnly();
       TimeOnly allBreakTime = new TimeOnly();
 
@@ -111,8 +116,8 @@ public static class FileManager
 
       for (int i = 0; i < currentFile.TimeSpanEntries.Count; i++)
       {
-         TimeSpanEntry entry = currentFile.TimeSpanEntries.ElementAt(i);
-         Dictionary timeSpanData = entry.ToDictionary();
+         entry = currentFile.TimeSpanEntries.ElementAt(i);
+         timeSpanData = entry.ToDictionary();
          row = i + 14;
 
          for (int j = 0; j < timeSpanEntryNames.Length; j++)

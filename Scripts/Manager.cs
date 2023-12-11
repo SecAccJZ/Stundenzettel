@@ -18,12 +18,10 @@ public partial class Manager : Node
 
 	public override void _Ready()
     {
-		// FIXME Delete this print
-		GD.Print(excelTimeSheetTemplatePath);
 
 #region Singleton logic
 
-		if (Singleton == null)
+			if (Singleton == null)
 		{
 			Singleton = this;
 			ProcessMode = ProcessModeEnum.Always;
