@@ -179,9 +179,11 @@ text = "Zurück"
 icon = ExtResource("8_gxvij")
 expand_icon = true
 
+[connection signal="focus_exited" from="Padding/ItemList/FromTime/Input" to="." method="SetFromTime"]
 [connection signal="text_submitted" from="Padding/ItemList/FromTime/Input" to="." method="SetFromTime"]
+[connection signal="focus_exited" from="Padding/ItemList/ToTime/Input" to="." method="SetToTime"]
 [connection signal="text_submitted" from="Padding/ItemList/ToTime/Input" to="." method="SetToTime"]
 [connection signal="text_changed" from="Padding/ItemList/Customer/Input" to="." method="SetCustomer"]
 [connection signal="item_selected" from="Padding/ItemList/Purpose/Input" to="." method="SetPurtpose"]
 [connection signal="text_changed" from="Padding/ItemList/DescriptionInput" to="." method="SetDescription"]
-[connection signal="button_down" from="BackPadding/Back" to="." method="SwitchToFileEdit"]
+[connection signal="button_up" from="BackPadding/Back" to="." method="SwitchToTimeSheetEditor"]

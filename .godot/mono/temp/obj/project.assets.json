@@ -1111,24 +1111,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tanne\\.nuget\\packages\\": {}
+    "C:\\Users\\HeDeAn\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\Stundenzettel\\Stundenzettel.csproj",
+      "projectUniqueName": "F:\\_My Code\\Stundenzettel\\Stundenzettel.csproj",
       "projectName": "Stundenzettel",
-      "projectPath": "C:\\Code\\Stundenzettel\\Stundenzettel.csproj",
-      "packagesPath": "C:\\Users\\tanne\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\Stundenzettel\\.godot\\mono\\temp\\obj\\",
+      "projectPath": "F:\\_My Code\\Stundenzettel\\Stundenzettel.csproj",
+      "packagesPath": "C:\\Users\\HeDeAn\\.nuget\\packages\\",
+      "outputPath": "F:\\_My Code\\Stundenzettel\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\tanne\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\HeDeAn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

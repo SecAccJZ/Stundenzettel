@@ -88,5 +88,6 @@ icon = ExtResource("7_cqm6i")
 expand_icon = true
 
 [connection signal="button_up" from="Padding/Splitter/NewTimeSpan" to="." method="AddTimeSpan"]
+[connection signal="focus_exited" from="TitlePadding/Date" to="." method="SetDate"]
 [connection signal="text_submitted" from="TitlePadding/Date" to="." method="SetDate"]
 [connection signal="button_up" from="BackPadding/Back" to="." method="SwitchToMainMenu"]

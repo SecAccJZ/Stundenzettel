@@ -31,8 +31,9 @@ public partial class TimeSheetEditor : CanvasLayer
 
 
 
-#region Signals
-	private void SetDate(string dateText)
+    #region Signals
+    private void SetDate() => SetDate(date.Text);
+    private void SetDate(string dateText)
 	{
 		try
 		{
