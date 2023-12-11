@@ -1,4 +1,4 @@
-res://Scenes/TimeSheetSelector.tscn
+res://Scenes/MainMenu.tscn
 res://Themes/Styles/BackButton.tres
 res://Themes/DefaultButton.tres
 res://Themes/BackButton.tres
@@ -9,9 +9,9 @@ res://Themes/Styles/TimeSpanButton.tres
 res://Themes/TimeSpanButton.tres
 res://Themes/Styles/DeleteButton.tres
 res://Themes/DeleteButton.tres
-res://Scenes/MainMenu.tscn
 res://Scenes/Settings.tscn
 res://Scenes/TimeSpanBlockEditor.tscn
+res://Scenes/TimeSheetSelector.tscn
 res://Scenes/TimeSheetEditor.tscn
 res://Objects/TimeSheetButton.tscn
 res://Scripts/MainMenu.cs

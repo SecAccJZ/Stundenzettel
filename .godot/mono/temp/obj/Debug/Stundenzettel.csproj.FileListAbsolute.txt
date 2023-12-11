@@ -35,3 +35,40 @@ F:\_My Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\Mic
 F:\_My Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 F:\_My Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 F:\_My Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Stundenzettel.deps.json
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Stundenzettel.runtimeconfig.json
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Stundenzettel.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Stundenzettel.pdb
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\EPPlus.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\EPPlus.Interfaces.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\EPPlus.System.Drawing.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.Configuration.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.Configuration.Json.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\Microsoft.Win32.SystemEvents.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\System.Drawing.Common.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\System.Security.Cryptography.Pkcs.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Code\Stundenzettel\.godot\mono\temp\bin\Debug\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.csproj.AssemblyReference.cache
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.AssemblyInfoInputs.cache
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.AssemblyInfo.cs
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.csproj.CoreCompileInputs.cache
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.sourcelink.json
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.csproj.CopyComplete
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.dll
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\refint\Stundenzettel.dll
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.pdb
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\Stundenzettel.genruntimeconfig.cache
+C:\Code\Stundenzettel\.godot\mono\temp\obj\Debug\ref\Stundenzettel.dll

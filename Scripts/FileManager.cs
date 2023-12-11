@@ -84,6 +84,7 @@ public static class FileManager
          TimeSheet currentFile = GetTimeSheetFromFile(timeSheetName);
          ExcelPackage package = new ExcelPackage(Manager.excelTimeSheetTemplatePath);
          // FIXME Delete this print
+         GD.Print(package.File);
          GD.Print($"{package.Workbook.Worksheets.Count}");
          ExcelWorksheet sheet = package.Workbook.Worksheets[0];
 

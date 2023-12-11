@@ -71,7 +71,7 @@ text = "Beenden"
 icon = ExtResource("6_r04vy")
 expand_icon = true
 
-[connection signal="button_down" from="MarginContainer/VBoxContainer/NewFile" to="." method="SwitchToNewFile"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/LoadFile" to="." method="SwitchToFileSelection"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/Settings" to="." method="SwitchToSettings"]
-[connection signal="button_down" from="MarginContainer/VBoxContainer/Quit" to="." method="QuitApp"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/NewFile" to="." method="SwitchToNewFile"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/LoadFile" to="." method="SwitchToFileSelection"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Settings" to="." method="SwitchToSettings"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Quit" to="." method="QuitApp"]

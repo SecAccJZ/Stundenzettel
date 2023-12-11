@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Stundenzettel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7f7b2440c95bd1af7f31e5d623aebe080d27e74")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Stundenzettel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Stundenzettel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

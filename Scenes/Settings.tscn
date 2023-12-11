@@ -89,4 +89,4 @@ expand_icon = true
 
 [connection signal="text_changed" from="Padding/SettingsList/WorkerName/Input" to="." method="SetWorkerName"]
 [connection signal="text_submitted" from="Padding/SettingsList/StartTime/Input" to="." method="SetStartTime"]
-[connection signal="button_down" from="BackPadding/Back" to="." method="ExitSettings"]
+[connection signal="button_up" from="BackPadding/Back" to="." method="ExitSettings"]

@@ -1,2 +1,2 @@
-﻿50621
-F:/Godot/Godot.exe
+﻿51832
+C:/Godot/Godot.exe
