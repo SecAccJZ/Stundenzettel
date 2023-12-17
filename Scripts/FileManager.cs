@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using OfficeOpenXml;
+using ClosedXML.Excel;
 
 public static class FileManager
 {
@@ -75,35 +75,40 @@ public static class FileManager
 
 #region Conversion to .xlsx
    public static void ConvertToExcelFiles(string[] filesNames)
-   {
-      string[] timeSpanEntryNames = new string[5] { "fromTime", "toTime", "customer", "purpose", "description"};
+   {      
       byte[] templateBytes = FileAccess.GetFileAsBytes("res://ExcelTemplates/StundenzettelTemplate.xlsx");
-
-      System.IO.MemoryStream ms = new System.IO.MemoryStream(templateBytes);
-
-      foreach (string timeSheetName in filesNames)
+      
+      if (FileAccess.GetOpenError() != Error.Ok)
+         throw new Exception("Failed to load .xlsx timesheet template file");
+      
+      using(var ms = new System.IO.MemoryStream(templateBytes))
       {
-         
-         TimeSheet currentFile = GetTimeSheetFromFile(timeSheetName);
-         ExcelPackage package = new ExcelPackage(ms);
-         ExcelWorksheet sheet = package.Workbook.Worksheets[0];
 
-         sheet.FillExcelFile(currentFile, CleanFileName(timeSheetName), timeSpanEntryNames);
+         foreach (string timeSheetName in filesNames)
+         {
+            TimeSheet currentFile = GetTimeSheetFromFile(timeSheetName);
+            using(var workbook = new XLWorkbook(ms))
+            {
+               IXLWorksheet sheet = workbook.Worksheet(1);
 
-         string  savePath = $"{Manager.documentsFilePath}/Stundenzettel/Rapportzettel - {Manager.Singleton.settingsData["workerName"]} - {currentFile.Date}.xlsx";
-         package.SaveAs(savePath);
+               sheet.FillExcelFile(currentFile, CleanFileName(timeSheetName));
+
+               string  savePath = $"{Manager.documentsFilePath}/Stundenzettel/Rapportzettel - {Manager.Singleton.settingsData["workerName"]} - {currentFile.Date}.xlsx";
+               workbook.SaveAs(savePath);
+            }
+         }
       }
-
-      ms.Close();
    }
 
 
 
-   private static ExcelWorksheet FillExcelFile(this ExcelWorksheet sheet, TimeSheet currentFile, string timeSheetName, string[] timeSpanEntryNames)
+   private static IXLWorksheet FillExcelFile(this IXLWorksheet sheet, TimeSheet currentFile, string timeSheetName)
    {
+      string[] timeSpanEntryNames = new string[5] { "fromTime", "toTime", "customer", "purpose", "description" };
+
       string workerName = (string)Manager.Singleton.settingsData["workerName"];
       int row;
-      int col = 0;
+      int col;
 
       TimeSpanEntry entry;
       Dictionary timeSpanData;
@@ -111,8 +116,8 @@ public static class FileManager
       TimeOnly allWorkTime = new TimeOnly();
       TimeOnly allBreakTime = new TimeOnly();
 
-      sheet.Cells[8, 2].Value = timeSheetName;
-      sheet.Cells[43, 3].Value = workerName;
+      sheet.Cell(8, 2).Value = timeSheetName;
+      sheet.Cell(43, 3).Value = workerName;
 
       for (int i = 0; i < currentFile.TimeSpanEntries.Count; i++)
       {
@@ -143,27 +148,31 @@ public static class FileManager
                case "description":
                   col = 12;
                   break;
+
+               default:
+                  throw new Exception($"Recieved unexpected timespanentry valuename {nameof(timeSpanEntryNames)}");
             }
 
-            sheet.Cells[row, col].Value = timeSpanData[$"{timeSpanEntryNames[j]}"];
+            sheet.Cell(row, col).Value = (string)timeSpanData[$"{timeSpanEntryNames[j]}"];
             
-            if (entry.Purpose == Purposes.Break)
-            {
-               TimeSpan breakTime = entry.ToTime  - entry.FromTime;
-               sheet.Cells[row, 10].Value = breakTime.ToString("hh\\:mm");
-               allBreakTime.Add(breakTime);
-            }
-            else
-            {
-               TimeSpan workTime = entry.ToTime - entry.FromTime;
-               sheet.Cells[row, 9].Value = workTime.ToString("hh\\:mm");
-               allWorkTime.Add(workTime);
-            }
          }
+
+         if (entry.Purpose == Purposes.Break)
+         {
+            TimeSpan breakTime = entry.ToTime  - entry.FromTime;
+            sheet.Cell(row, 10).Value = breakTime.ToString("hh\\:mm");
+            allBreakTime = allBreakTime.Add(breakTime);
+         }
+         else
+      {
+         TimeSpan workTime = entry.ToTime - entry.FromTime;
+         sheet.Cell(row, 9).Value = workTime.ToString("hh\\:mm");
+         allWorkTime = allWorkTime.Add(workTime);
+      }
       }
       
-      sheet.Cells[39, 9].Value = allWorkTime;      
-      sheet.Cells[39, 10].Value = allBreakTime;      
+      sheet.Cell(39, 9).Value = allWorkTime.ToString();      
+      sheet.Cell(39, 10).Value = allBreakTime.ToString();      
 
       return sheet;
    }
