@@ -13,7 +13,7 @@ public partial class Manager : Node
 	public TimeOnly lastTimeStamp;
 	public TimeSheet selectedSheet;
 	public TimeSpanEntry selectedEntry;
-	
+
 
 
 	public override void _Ready()
@@ -66,7 +66,6 @@ public partial class Manager : Node
 		if (!documentsDir.DirExists("Stundenzettel / TimeSheets"))
 			documentsDir.MakeDirRecursive("Stundenzettel/TimeSheets");
 	}
-
 
 
 
