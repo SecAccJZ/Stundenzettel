@@ -25,9 +25,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
+      
     - name: Merge to Backup Branch
       if: success()
-      run:
-        git checkout -B backup
+      run: |
+        git checkout backup
         git merge --no-ff main
         git push origin backup
