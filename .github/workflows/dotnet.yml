@@ -29,6 +29,7 @@ jobs:
     - name: Merge to Backup Branch
       if: success()
       run: |
-        git checkout -B backup
-        git merge --no-ff main
-        git push origin backup
+        git checkout backup
+        git fetch --all
+        git reset --hard origin/main
+        git push -f origin backup
