@@ -81,6 +81,12 @@ public partial class TimeSpanBlockEditor : CanvasLayer
 
 
 
-   private void SwitchToTimeSheetEditor() => Manager.Singleton.SwitchScene("TimeSheetEditor");
-   #endregion
+   private void SwitchToTimeSheetEditor()
+   {
+      SetFromTime();
+      SetToTime();
+      
+      Manager.Singleton.SwitchScene("TimeSheetEditor");
+   }
+#endregion
 }

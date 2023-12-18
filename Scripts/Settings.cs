@@ -29,6 +29,8 @@ public partial class Settings : CanvasLayer
 #region  Signals
     private void ExitSettings()
 	{
+		SetStartTime();
+
 		var file = FileAccess.Open(Manager.settingsFilePath, FileAccess.ModeFlags.Write);
 		Manager.Singleton.SaveSettings(file);
 
@@ -37,6 +39,7 @@ public partial class Settings : CanvasLayer
 
 
 
+	private void SetStartTime() => SetStartTime(startTimeInput.Text);
 	private void SetStartTime(string timeText)
 	{
 		try

@@ -34,5 +34,5 @@ theme = ExtResource("3_qt0xh")
 icon = ExtResource("4_hwrfi")
 expand_icon = true
 
-[connection signal="button_down" from="Edit" to="." method="SwitchToTimeSheetEditor"]
-[connection signal="button_down" from="Delete" to="." method="DeleteEntry"]
+[connection signal="pressed" from="Edit" to="." method="SwitchToTimeSheetEditor"]
+[connection signal="pressed" from="Delete" to="." method="DeleteEntry"]

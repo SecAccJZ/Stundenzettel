@@ -70,5 +70,5 @@ text = "Generate Excel files"
 icon = ExtResource("6_07v8f")
 expand_icon = true
 
-[connection signal="button_down" from="HeaderPadding/HBox/Back" to="." method="SwitchToMainMenu"]
-[connection signal="button_down" from="HeaderPadding/HBox/Convert" to="." method="GenerateExcelFiles"]
+[connection signal="pressed" from="HeaderPadding/HBox/Back" to="." method="SwitchToMainMenu"]
+[connection signal="pressed" from="HeaderPadding/HBox/Convert" to="." method="GenerateExcelFiles"]

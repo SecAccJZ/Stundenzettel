@@ -57,6 +57,8 @@ public partial class TimeSheetEditor : CanvasLayer
 
 	private void SwitchToMainMenu()
 	{
+		SetDate();
+
 		if (timeSheet.TimeSpanEntries.Count > 0)
 			FileManager.SaveTimeSheet(timeSheet);
 

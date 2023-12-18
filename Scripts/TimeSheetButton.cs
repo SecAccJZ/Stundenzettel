@@ -6,6 +6,8 @@ public partial class TimeSheetButton : HSplitContainer
 	private string dateText;
 	private Button editButton;
 
+
+
     public override void _Ready()
     {
 		editButton = GetNode<Button>("Edit");
