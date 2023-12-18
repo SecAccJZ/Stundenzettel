@@ -74,7 +74,7 @@ public static class FileManager
 
 
 #region Conversion to .xlsx
-   public static void ConvertToExcelFiles(string[] filesNames)
+   public static bool ConvertToExcelFiles(string[] filesNames)
    {      
       byte[] templateBytes = FileAccess.GetFileAsBytes("res://ExcelTemplates/StundenzettelTemplate.xlsx");
       
@@ -83,7 +83,6 @@ public static class FileManager
       
       using(var ms = new System.IO.MemoryStream(templateBytes))
       {
-
          foreach (string timeSheetName in filesNames)
          {
             TimeSheet currentFile = GetTimeSheetFromFile(timeSheetName);
@@ -98,6 +97,8 @@ public static class FileManager
             }
          }
       }
+
+      return true;
    }
 
 
@@ -109,6 +110,7 @@ public static class FileManager
       string workerName = (string)Manager.Singleton.settingsData["workerName"];
       int row;
       int col;
+      string cellValue;
 
       TimeSpanEntry entry;
       Dictionary timeSpanData;
@@ -153,8 +155,14 @@ public static class FileManager
                   throw new Exception($"Recieved unexpected timespanentry valuename {nameof(timeSpanEntryNames)}");
             }
 
-            sheet.Cell(row, col).Value = (string)timeSpanData[$"{timeSpanEntryNames[j]}"];
-            
+            if (timeSpanEntryNames[j] == "purpose")
+            {
+               cellValue = PurposeNames.GetName(entry.Purpose);
+            }
+            else
+               cellValue = (string)timeSpanData[$"{timeSpanEntryNames[j]}"];
+
+            sheet.Cell(row, col).Value = cellValue;
          }
 
          if (entry.Purpose == Purposes.Break)
@@ -164,11 +172,11 @@ public static class FileManager
             allBreakTime = allBreakTime.Add(breakTime);
          }
          else
-      {
-         TimeSpan workTime = entry.ToTime - entry.FromTime;
-         sheet.Cell(row, 9).Value = workTime.ToString("hh\\:mm");
-         allWorkTime = allWorkTime.Add(workTime);
-      }
+         {
+            TimeSpan workTime = entry.ToTime - entry.FromTime;
+            sheet.Cell(row, 9).Value = workTime.ToString("hh\\:mm");
+            allWorkTime = allWorkTime.Add(workTime);
+         }
       }
       
       sheet.Cell(39, 9).Value = allWorkTime.ToString();      
