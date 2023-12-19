@@ -63,7 +63,7 @@ public partial class TimeSheetEditor : CanvasLayer
 			FileManager.SaveTimeSheet(timeSheet);
 
 		Manager.Singleton.selectedSheet = null;
-		Manager.Singleton.CallDeferred("SwitchScene", "MainMenu");
+		Manager.Singleton.CallDeferred("SwitchScene", "TimeSheetSelector");
 	}
 #endregion
 }

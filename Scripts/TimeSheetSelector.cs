@@ -1,9 +1,10 @@
-using DocumentFormat.OpenXml.InkML;
 using Godot;
 
 public partial class TimeSheetSelector : CanvasLayer
 {
-	private PackedScene finishConversionIndicator = GD.Load("res://Objects/FinishConversionIndicator.tscn") as PackedScene;
+	private Label finishConversionIndicator;
+	private Timer timer;
+	private ColorRect bg;
 	private readonly string timeSheetsPath = $"{Manager.documentsFilePath}/Stundenzettel/TimeSheets";
 	private PackedScene timeSheetButton;
 	private VBoxContainer timeSheetList;
@@ -15,7 +16,10 @@ public partial class TimeSheetSelector : CanvasLayer
 	{
 		timeSheetButton = GD.Load("res://Objects/TimeSheetButton.tscn") as PackedScene;
 		timeSheetList = GetNode<VBoxContainer>("Padding/ScrollList/TimeSheetList");
-		
+		finishConversionIndicator = GetNode<Label>("FinishConversionIndicator");
+		timer = finishConversionIndicator.GetNode<Timer>("Timer");
+		bg = finishConversionIndicator.GetNode<ColorRect>("TextPadding/Background");
+
 		Manager.Singleton.FixDocumentDirectory();
 		timeSheetFiles = DirAccess.GetFilesAt(timeSheetsPath);
 		
@@ -27,23 +31,22 @@ public partial class TimeSheetSelector : CanvasLayer
 #region Signals
 	private void GenerateExcelFiles()
 	{
-		bool isDone = false;
+		bool isDone;
+
 		isDone = FileManager.ConvertToExcelFiles(timeSheetFiles);
 
-		Label indicator = finishConversionIndicator.Instantiate() as Label;
-		ColorRect bg = indicator.GetNode<ColorRect>("TextPadding/Background");
 		if (isDone)
 		{
-			indicator.Text = "Umwandeln abgeschlossen";
+			finishConversionIndicator.Text = "Umwandeln abgeschlossen";
 			bg.Color = new Color("#7dfd7d");
 		}
 		else
 		{
-			indicator.Text = "Umwandeln fehlgeschlagen";
+			finishConversionIndicator.Text = "Umwandeln fehlgeschlagen";
 			bg.Color = new Color("#ff7d7d");
 		}
-
-		AddChild(indicator);
+		finishConversionIndicator.Modulate = finishConversionIndicator.Modulate with { A = 1 };
+		timer.Start();
 	}
 
 
