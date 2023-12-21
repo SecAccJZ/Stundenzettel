@@ -31,7 +31,7 @@ public partial class TimeSpanBlockEditor : CanvasLayer
 		fromTime.Text = entry.FromTime.ToString();
 		toTime.Text = entry.ToTime.ToString();
 		customer.Text = entry.Customer;
-		purpose.Selected = entry.Purpose != null ? (int)entry.Purpose : -1;
+		purpose.Selected = (int)entry.Purpose;
 		description.Text = entry.Description;
    }
 

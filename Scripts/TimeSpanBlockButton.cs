@@ -3,29 +3,29 @@ using System;
 
 public partial class TimeSpanBlockButton : HSplitContainer
 {
-	public TimeSpanEntry Entry { get; set; }
+	public TimeSpanEntry entry { get; set; }
     private Button editButton;
 
 
 
     public override void _Ready()
     {
-		if (Entry == null)
+		if (entry == null)
 		{
-			Entry = new TimeSpanEntry
+			entry = new TimeSpanEntry
 			(
 			Manager.Singleton.lastTimeStamp,
 			TimeOnly.FromDateTime(DateTime.Now)
 			);
 
-			Manager.Singleton.lastTimeStamp = Entry.ToTime;
+			Manager.Singleton.lastTimeStamp = entry.ToTime;
 
-			Manager.Singleton.selectedSheet.TimeSpanEntries.Add(Entry);
+			Manager.Singleton.selectedSheet.TimeSpanEntries.Add(entry);
 		}			
 
 		editButton = GetNode<Button>("Edit");
 
-		editButton.Text = $"{Entry.FromTime} - {Entry.ToTime}";
+		editButton.Text = $"{entry.FromTime} - {entry.ToTime}";
     }
 
 
@@ -33,7 +33,7 @@ public partial class TimeSpanBlockButton : HSplitContainer
 #region Signals
 	private void SwitchToTimeSpanBlockEditor()
 	{
-		Manager.Singleton.selectedEntry = Entry;
+		Manager.Singleton.selectedEntry = entry;
 		Manager.Singleton.SwitchScene("TimeSpanBlockEditor");
 	}
 
@@ -41,7 +41,7 @@ public partial class TimeSpanBlockButton : HSplitContainer
 
     private void DeleteEntry()
     {
-		Manager.Singleton.selectedSheet.TimeSpanEntries.Remove(Entry);
+		Manager.Singleton.selectedSheet.TimeSpanEntries.Remove(entry);
         QueueFree();
     }
 #endregion

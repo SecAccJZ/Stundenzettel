@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Godot;
 
 public partial class TimeSheetSelector : CanvasLayer
@@ -22,7 +24,8 @@ public partial class TimeSheetSelector : CanvasLayer
 
 		Manager.Singleton.FixDocumentDirectory();
 		timeSheetFiles = DirAccess.GetFilesAt(timeSheetsPath);
-		
+		Array.Sort(timeSheetFiles, (a, b) => Comparer.Default.Compare(b, a));
+
 		timeSheetList.PopulateList(timeSheetFiles, timeSheetButton);
 	}
 
