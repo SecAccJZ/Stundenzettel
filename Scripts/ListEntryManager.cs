@@ -45,7 +45,7 @@ public static class ListEntryManager
       foreach (TimeSpanEntry entry in inputList)
       {
          TimeSpanBlockButton newEntry = instanceResource.Instantiate() as TimeSpanBlockButton;
-         newEntry.Entry = entry;
+         newEntry.entry = entry;
          outputList.AddChild(newEntry);
       }
       return outputList;
