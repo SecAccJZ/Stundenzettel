@@ -3,7 +3,6 @@ using Godot;
 public partial class TimeSheetButton : HSplitContainer
 {
 	public string FileName { get; set; }
-	private string dateText;
 	private Button editButton;
 
 

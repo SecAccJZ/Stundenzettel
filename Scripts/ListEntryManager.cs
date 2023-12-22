@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -49,5 +50,33 @@ public static class ListEntryManager
          outputList.AddChild(newEntry);
       }
       return outputList;
+   }
+
+
+
+/// <summary>
+/// Takes in a list of customer name strings and fills the VBoxContainer with button elements with customer names.
+/// </summary>
+/// <param name="outputlist"></param>
+/// <param name="inputlist"></param>
+/// <param name="instanceResource"></param>
+/// <returns>With CustomerNameButtons filled VBoxContainer</returns>
+   public static VBoxContainer PopulateList
+   (
+      this VBoxContainer outputlist,
+      List<string> inputlist,
+      PackedScene instanceResource
+   )
+   {
+      foreach (Node button in outputlist.GetChildren())
+         button.QueueFree();
+
+      foreach (string entry in inputlist)
+      {
+         CustomerNameButton newEntry = instanceResource.Instantiate() as CustomerNameButton;
+         newEntry.CustomerName = entry;
+         outputlist.AddChild(newEntry);
+      }
+      return outputlist;
    }
 }
