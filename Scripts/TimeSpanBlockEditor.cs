@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class TimeSpanBlockEditor : CanvasLayer
@@ -94,9 +95,13 @@ public partial class TimeSpanBlockEditor : CanvasLayer
       if (e.IsActionPressed("RightClick"))
       {
          customerPresetSettings.Visible = true;
-         customerPresetList.PopulateList(customerNames, customerNameButton);
+         UpdateCustomerNameList();
       }
    }
+
+
+
+   private void UpdateCustomerNameList() => customerPresetList.PopulateList(customerNames, customerNameButton);
 
 
 
@@ -105,9 +110,10 @@ public partial class TimeSpanBlockEditor : CanvasLayer
       if (!string.IsNullOrEmpty(customer.Text))
       {
          if (!customerNames.Contains(customer.Text))
+         {
             customerNames.Add(customer.Text);
-
-            CloseCustomerPresetSettings();
+            UpdateCustomerNameList();
+         }
       }
    }
 
@@ -115,9 +121,12 @@ public partial class TimeSpanBlockEditor : CanvasLayer
 
    private void CloseCustomerPresetSettings()
    {
-      Manager.Singleton.customerNames = customerNames;
-      Manager.Singleton.SaveCustomerNames();
-      
+      if (!customerNames.SequenceEqual(Manager.Singleton.customerNames))
+      {
+         Manager.Singleton.customerNames = customerNames;
+         Manager.Singleton.SaveCustomerNames();
+      }
+
       customerPresetSettings.Visible = false;
    }
    #endregion
