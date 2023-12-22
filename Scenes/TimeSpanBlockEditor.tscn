@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5cgj2oowkdva"]
+[gd_scene load_steps=12 format=3 uid="uid://c5cgj2oowkdva"]
 
 [ext_resource type="Script" path="res://Scripts/TimeSpanBlockEditor.cs" id="1_jndds"]
 [ext_resource type="Theme" uid="uid://0jlf0hixycar" path="res://Themes/DefaultMargin.tres" id="2_dki3q"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://dktdsgfp64vc" path="res://Themes/BackButton.tres" id="7_80gdn"]
 [ext_resource type="Texture2D" uid="uid://dethjkxhe61b7" path="res://Assets/Sprites/arrow-back-up.svg" id="8_gxvij"]
 [ext_resource type="Theme" uid="uid://ck4at8k5q5e0d" path="res://Themes/DefaultButton.tres" id="9_870q0"]
+[ext_resource type="Theme" uid="uid://bstgv5d387c4m" path="res://Themes/DefaultTab.tres" id="9_ijx7x"]
 [ext_resource type="StyleBox" uid="uid://b17gqge3mtho0" path="res://Themes/Styles/CustomerNamesScrollBox.tres" id="10_ie043"]
 
 [node name="TimeSpanBlock" type="CanvasLayer"]
@@ -26,6 +27,7 @@ color = Color(0.235294, 0.235294, 0.235294, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_dki3q")
@@ -169,11 +171,13 @@ context_menu_enabled = false
 wrap_mode = 1
 
 [node name="BackPadding" type="MarginContainer" parent="."]
-offset_right = 294.0
-offset_bottom = 165.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 162.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
 
 [node name="Back" type="Button" parent="BackPadding"]
 layout_mode = 2
@@ -184,6 +188,17 @@ theme = ExtResource("7_80gdn")
 text = "Zurück"
 icon = ExtResource("8_gxvij")
 expand_icon = true
+
+[node name="TabBar" type="TabBar" parent="BackPadding"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("9_ijx7x")
+tab_count = 2
+current_tab = 1
+clip_tabs = false
+tab_0/title = "Zeiten"
+tab_1/title = "Fahrtweg"
 
 [node name="CustomerPresetBg" type="ColorRect" parent="."]
 visible = false
