@@ -226,6 +226,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BackPadding" type="MarginContainer" parent="CustomerPresetBg"]
+layout_mode = 0
 offset_right = 294.0
 offset_bottom = 165.0
 grow_horizontal = 2
