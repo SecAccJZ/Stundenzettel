@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class TimeSpanBlockEditor : CanvasLayer
@@ -6,8 +7,12 @@ public partial class TimeSpanBlockEditor : CanvasLayer
    private const string constPathPart = "Padding/ItemList/";
    private LineEdit fromTime; 
    private LineEdit toTime; 
-   private LineEdit customer; 
-   private OptionButton purpose; 
+   private LineEdit customer;
+   private ColorRect customerPresetSettings;
+   public List<string> customerNames = new List<string>();
+   private VBoxContainer customerPresetList;
+   private PackedScene customerNameButton;
+   private OptionButton purpose;
    private TextEdit description;
    private TimeSpanEntry entry = Manager.Singleton.selectedEntry;
 
@@ -18,8 +23,13 @@ public partial class TimeSpanBlockEditor : CanvasLayer
       fromTime = GetNode<LineEdit>($"{constPathPart}FromTime/Input");
       toTime = GetNode<LineEdit>($"{constPathPart}ToTime/Input");
       customer = GetNode<LineEdit>($"{constPathPart}Customer/Input");
+      customerPresetSettings = GetNode<ColorRect>("CustomerPresetBg");
+      customerPresetList = customerPresetSettings.GetNode<VBoxContainer>("Padding/ItemList/ScrollContainer/NameList");
+      customerNameButton = GD.Load("res://Objects/CustomerNameButton.tscn") as PackedScene;
       purpose = GetNode<OptionButton>($"{constPathPart}Purpose/Input");
       description = GetNode<TextEdit>($"{constPathPart}DescriptionInput");
+
+      customerNames = Manager.Singleton.customerNames;
 
       SetInput(entry);
    }
@@ -68,7 +78,49 @@ public partial class TimeSpanBlockEditor : CanvasLayer
 
 
 
-   private void SetCustomer(string name) => entry.Customer = name;
+   public void SetCustomer(string name)
+   {
+      entry.Customer = name;
+
+      if (customer.Text != entry.Customer)
+         customer.Text = entry.Customer;
+   }
+
+
+
+   #region CustomerPresetSettings
+   private void CustomerPresetSettings(InputEvent e)
+   {
+      if (e.IsActionPressed("RightClick"))
+      {
+         customerPresetSettings.Visible = true;
+         customerPresetList.PopulateList(customerNames, customerNameButton);
+      }
+   }
+
+
+
+   private void SaveName()
+   {
+      if (!string.IsNullOrEmpty(customer.Text))
+      {
+         if (!customerNames.Contains(customer.Text))
+            customerNames.Add(customer.Text);
+
+            CloseCustomerPresetSettings();
+      }
+   }
+
+
+
+   private void CloseCustomerPresetSettings()
+   {
+      Manager.Singleton.customerNames = customerNames;
+      Manager.Singleton.SaveCustomerNames();
+      
+      customerPresetSettings.Visible = false;
+   }
+   #endregion
 
 
 

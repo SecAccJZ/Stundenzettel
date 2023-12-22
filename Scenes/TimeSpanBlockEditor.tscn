@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5cgj2oowkdva"]
+[gd_scene load_steps=11 format=3 uid="uid://c5cgj2oowkdva"]
 
 [ext_resource type="Script" path="res://Scripts/TimeSpanBlockEditor.cs" id="1_jndds"]
 [ext_resource type="Theme" uid="uid://0jlf0hixycar" path="res://Themes/DefaultMargin.tres" id="2_dki3q"]
@@ -8,6 +8,8 @@
 [ext_resource type="StyleBox" uid="uid://bohay8sac6a08" path="res://Themes/Styles/DefaultLine.tres" id="6_s1ox0"]
 [ext_resource type="Theme" uid="uid://dktdsgfp64vc" path="res://Themes/BackButton.tres" id="7_80gdn"]
 [ext_resource type="Texture2D" uid="uid://dethjkxhe61b7" path="res://Assets/Sprites/arrow-back-up.svg" id="8_gxvij"]
+[ext_resource type="Theme" uid="uid://ck4at8k5q5e0d" path="res://Themes/DefaultButton.tres" id="9_870q0"]
+[ext_resource type="StyleBox" uid="uid://b17gqge3mtho0" path="res://Themes/Styles/CustomerNamesScrollBox.tres" id="10_ie043"]
 
 [node name="TimeSpanBlock" type="CanvasLayer"]
 script = ExtResource("1_jndds")
@@ -49,6 +51,7 @@ size_flags_horizontal = 3
 theme = ExtResource("5_6rmbp")
 placeholder_text = "Uhrzeit"
 alignment = 1
+context_menu_enabled = false
 
 [node name="S1" type="HSeparator" parent="Padding/ItemList"]
 layout_mode = 2
@@ -71,6 +74,7 @@ size_flags_horizontal = 3
 theme = ExtResource("5_6rmbp")
 placeholder_text = "Uhrzeit"
 alignment = 1
+context_menu_enabled = false
 
 [node name="S2" type="HSeparator" parent="Padding/ItemList"]
 layout_mode = 2
@@ -93,6 +97,7 @@ size_flags_horizontal = 3
 theme = ExtResource("5_6rmbp")
 placeholder_text = "Name"
 alignment = 1
+context_menu_enabled = false
 
 [node name="S3" type="HSeparator" parent="Padding/ItemList"]
 layout_mode = 2
@@ -160,6 +165,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_6rmbp")
 placeholder_text = "Arbeitsbeschreibung"
+context_menu_enabled = false
 wrap_mode = 1
 
 [node name="BackPadding" type="MarginContainer" parent="."]
@@ -179,11 +185,71 @@ text = "Zurück"
 icon = ExtResource("8_gxvij")
 expand_icon = true
 
+[node name="CustomerPresetBg" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.235294, 0.235294, 0.235294, 0.490196)
+
+[node name="Padding" type="MarginContainer" parent="CustomerPresetBg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dki3q")
+theme_override_constants/margin_top = 200
+
+[node name="ItemList" type="VBoxContainer" parent="CustomerPresetBg/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="SaveName" type="Button" parent="CustomerPresetBg/Padding/ItemList"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("9_870q0")
+text = "Name Speichern"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CustomerPresetBg/Padding/ItemList"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("10_ie043")
+
+[node name="NameList" type="VBoxContainer" parent="CustomerPresetBg/Padding/ItemList/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BackPadding" type="MarginContainer" parent="CustomerPresetBg"]
+offset_right = 294.0
+offset_bottom = 165.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="Back" type="Button" parent="CustomerPresetBg/BackPadding"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+focus_mode = 0
+theme = ExtResource("7_80gdn")
+text = "Zurück"
+icon = ExtResource("8_gxvij")
+expand_icon = true
+
 [connection signal="focus_exited" from="Padding/ItemList/FromTime/Input" to="." method="SetFromTime"]
 [connection signal="text_submitted" from="Padding/ItemList/FromTime/Input" to="." method="SetFromTime"]
 [connection signal="focus_exited" from="Padding/ItemList/ToTime/Input" to="." method="SetToTime"]
 [connection signal="text_submitted" from="Padding/ItemList/ToTime/Input" to="." method="SetToTime"]
+[connection signal="gui_input" from="Padding/ItemList/Customer/Input" to="." method="CustomerPresetSettings"]
 [connection signal="text_changed" from="Padding/ItemList/Customer/Input" to="." method="SetCustomer"]
 [connection signal="item_selected" from="Padding/ItemList/Purpose/Input" to="." method="SetPurtpose"]
 [connection signal="text_changed" from="Padding/ItemList/DescriptionInput" to="." method="SetDescription"]
 [connection signal="pressed" from="BackPadding/Back" to="." method="SwitchToTimeSheetEditor"]
+[connection signal="pressed" from="CustomerPresetBg/Padding/ItemList/SaveName" to="." method="SaveName"]
+[connection signal="pressed" from="CustomerPresetBg/BackPadding/Back" to="." method="CloseCustomerPresetSettings"]

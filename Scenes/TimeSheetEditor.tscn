@@ -69,6 +69,7 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 40
 placeholder_text = "Datum"
 alignment = 1
+context_menu_enabled = false
 
 [node name="BackPadding" type="MarginContainer" parent="."]
 offset_right = 294.0
