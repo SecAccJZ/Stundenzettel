@@ -105,7 +105,7 @@ public static class FileManager
 
    private static IXLWorksheet FillExcelFile(this IXLWorksheet sheet, TimeSheet currentFile, string timeSheetName)
    {
-      string[] timeSpanEntryNames = new string[5] { "fromTime", "toTime", "customer", "purpose", "description" };
+      string[] timeSpanEntryNames = new string[7] { "fromTime", "toTime", "customer", "purpose", "description", "kmStart", "kmEnd" };
 
       string workerName = (string)Manager.Singleton.settingsData["workerName"];
       int row;
@@ -117,6 +117,7 @@ public static class FileManager
 
       TimeOnly allWorkTime = new TimeOnly();
       TimeOnly allBreakTime = new TimeOnly();
+      int allKmDriven = 0;
 
       sheet.Cell(8, 2).Value = timeSheetName;
       sheet.Cell(43, 3).Value = workerName;
@@ -150,6 +151,14 @@ public static class FileManager
                case "description":
                   col = 12;
                   break;
+               
+               case "kmStart":
+                  col = 20;
+                  break;
+
+               case "kmEnd":
+                  col = 21;
+                  break;
 
                default:
                   throw new Exception($"Recieved unexpected timespanentry valuename {nameof(timeSpanEntryNames)}");
@@ -177,10 +186,15 @@ public static class FileManager
             sheet.Cell(row, 9).Value = workTime.ToString("hh\\:mm");
             allWorkTime = allWorkTime.Add(workTime);
          }
+         
+         int kmDriven = entry.KmEnd - entry.KmStart;
+         sheet.Cell(row, 22).Value = $"{kmDriven} km";
+         allKmDriven += kmDriven;
       }
       
-      sheet.Cell(39, 9).Value = allWorkTime.ToString();      
-      sheet.Cell(39, 10).Value = allBreakTime.ToString();      
+      sheet.Cell(39, 9).Value = allWorkTime.ToString();
+      sheet.Cell(39, 10).Value = allBreakTime.ToString(); 
+      sheet.Cell(39, 22).Value = $"{allKmDriven} km"; 
 
       return sheet;
    }
