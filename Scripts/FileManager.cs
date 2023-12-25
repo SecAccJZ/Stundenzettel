@@ -4,6 +4,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 public static class FileManager
 {
@@ -103,7 +104,7 @@ public static class FileManager
 
 
 
-   private static IXLWorksheet FillExcelFile(this IXLWorksheet sheet, TimeSheet currentFile, string timeSheetName)
+   private static IXLWorksheet FillExcelFile(this IXLWorksheet sheet, TimeSheet currentFile, string date)
    {
       string[] timeSpanEntryNames = new string[7] { "fromTime", "toTime", "customer", "purpose", "description", "kmStart", "kmEnd" };
 
@@ -119,8 +120,7 @@ public static class FileManager
       TimeOnly allBreakTime = new TimeOnly();
       int allKmDriven = 0;
 
-      sheet.Cell(8, 2).Value = timeSheetName;
-      sheet.Cell(43, 3).Value = workerName;
+      sheet.Cell(9, 2).Value = date;
 
       for (int i = 0; i < currentFile.TimeSpanEntries.Count; i++)
       {
@@ -194,7 +194,15 @@ public static class FileManager
       
       sheet.Cell(39, 9).Value = allWorkTime.ToString();
       sheet.Cell(39, 10).Value = allBreakTime.ToString(); 
-      sheet.Cell(39, 22).Value = $"{allKmDriven} km"; 
+      sheet.Cell(39, 22).Value = $"{allKmDriven} km";
+
+      sheet.Cell(43, 3).Value = workerName;
+
+      string signatureImagePath = (string)Manager.Singleton.settingsData["signaturePath"];
+
+      if (!string.IsNullOrWhiteSpace(signatureImagePath))
+         if (FileAccess.FileExists(signatureImagePath))
+            sheet.AddPicture(signatureImagePath).MoveTo(sheet.Cell(45, 3)).WithSize(300, 63);
 
       return sheet;
    }

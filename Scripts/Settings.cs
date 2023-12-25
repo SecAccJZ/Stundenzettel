@@ -1,17 +1,19 @@
 using Godot;
-using System;
+using System; 
 
 public partial class Settings : CanvasLayer
 {
-	private LineEdit startTimeInput;
 	private LineEdit workerName;
+	private LineEdit signaturePath;
+	private LineEdit startTimeInput;
 
 
 
     public override void _Ready()
     {
-		startTimeInput = GetNode<LineEdit>("Padding/SettingsList/StartTime/Input");
 		workerName = GetNode<LineEdit>("Padding/SettingsList/WorkerName/Input");
+		signaturePath = GetNode<LineEdit>("Padding/SettingsList/SignaturePath/Input");
+		startTimeInput = GetNode<LineEdit>("Padding/SettingsList/StartTime/Input");
 
 		AssignSettingValues();
     }
@@ -20,26 +22,23 @@ public partial class Settings : CanvasLayer
 
 	private void AssignSettingValues()
 	{
-		startTimeInput.Text = (string)Manager.Singleton.settingsData["startTime"];
 		workerName.Text = (string)Manager.Singleton.settingsData["workerName"];
+		signaturePath.Text = (string)Manager.Singleton.settingsData["signaturePath"];
+		startTimeInput.Text = (string)Manager.Singleton.settingsData["startTime"];
 	}
 
 
 
-#region  Signals
-    private void ExitSettings()
-	{
-		SetStartTime();
-
-		var file = FileAccess.Open(Manager.settingsFilePath, FileAccess.ModeFlags.Write);
-		Manager.Singleton.SaveSettings(file);
-
-		Manager.Singleton.CallDeferred("SwitchScene", "MainMenu");
-	}
+    #region  Signals
+    private void SetWorkerName(string name) => Manager.Singleton.settingsData["workerName"] = name;
 
 
 
-	private void SetStartTime() => SetStartTime(startTimeInput.Text);
+    private void SelectSignaturePath(string path) => Manager.Singleton.settingsData["signaturePath"] = path;
+
+
+
+    private void SetStartTime() => SetStartTime(startTimeInput.Text);
 	private void SetStartTime(string timeText)
 	{
 		try
@@ -55,9 +54,14 @@ public partial class Settings : CanvasLayer
 
 
 
-	private void SetWorkerName(string name)
+	private void ExitSettings()
 	{
-			Manager.Singleton.settingsData["workerName"] = name;
+		SetStartTime();
+
+		var file = FileAccess.Open(Manager.settingsFilePath, FileAccess.ModeFlags.Write);
+		Manager.Singleton.SaveSettings(file);
+
+		Manager.Singleton.CallDeferred("SwitchScene", "MainMenu");
 	}
 #endregion
 }

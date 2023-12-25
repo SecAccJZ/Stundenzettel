@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://ck4at8k5q5e0d"]
 
-[ext_resource type="StyleBox" uid="uid://0wfy5wxpp1y4" path="res://Themes/Styles/BackButton.tres" id="1_87c47"]
+[ext_resource type="StyleBox" uid="uid://qjayda27g00v" path="res://Themes/Styles/ButtonWithoutIcon.tres" id="1_0ef5r"]
 
 [sub_resource type="SystemFont" id="SystemFont_tp1ee"]
 
@@ -23,8 +23,8 @@ Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/styles/disabled = ExtResource("1_87c47")
-Button/styles/focus = ExtResource("1_87c47")
-Button/styles/hover = ExtResource("1_87c47")
-Button/styles/normal = ExtResource("1_87c47")
-Button/styles/pressed = ExtResource("1_87c47")
+Button/styles/disabled = ExtResource("1_0ef5r")
+Button/styles/focus = ExtResource("1_0ef5r")
+Button/styles/hover = ExtResource("1_0ef5r")
+Button/styles/normal = ExtResource("1_0ef5r")
+Button/styles/pressed = ExtResource("1_0ef5r")
